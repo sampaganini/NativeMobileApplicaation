@@ -3,16 +3,17 @@ package com.example.fixnow;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
+import android.widget.EditText;
+import android.widget.SeekBar;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-
-import com.example.fixnow.R;
 import com.example.fixnow.utils.LocationUtils;
 import com.example.fixnow.utils.PersmissionHelper;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -21,12 +22,17 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.Circle;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
-public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback {
+import org.w3c.dom.Text;
+
+
+public class RegisterActivity3 extends AppCompatActivity implements OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback{
 
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
     private boolean permissionDenied = false;
@@ -34,12 +40,16 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private static final int LODZ_ZOOM = 15;
     private FusedLocationProviderClient fusedLocationClient;
     private PersmissionHelper appCompatPermissionHelper = new PersmissionHelper();
+    private SeekBar radius;
+    private EditText realRadius;
     private LatLng UserLatLng;
+    private Circle mapCircle;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_register3);
         getSupportActionBar().hide();
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -48,6 +58,34 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         enableMyLocation();
+        radius = findViewById(R.id.seekBar);
+        realRadius = findViewById(R.id.editTextTextPersonName5);
+        radius.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            int progressChangedValue = 0;
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                // When seek bar progress is changed, change image alpha value.
+                progressChangedValue = progress;
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                realRadius.setText(""+progressChangedValue);
+                if(UserLatLng != null) {
+                    if(mapCircle != null)
+                    {
+                        mapCircle.remove();
+                    }
+                    mapCircle = drawCircle(UserLatLng, progressChangedValue);
+                }
+
+            }
+        });
     }
 
     @Override
@@ -56,7 +94,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         // enableMyLocation();
     }
 
-
     private void enableMyLocation() {
         ActivityResultLauncher<String[]> locationPermissionRequest =
                 registerForActivityResult(new ActivityResultContracts
@@ -64,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                             Boolean fineLocationGranted = result.getOrDefault(
                                     Manifest.permission.ACCESS_FINE_LOCATION, false);
                             Boolean coarseLocationGranted = result.getOrDefault(
-                                    Manifest.permission.ACCESS_COARSE_LOCATION, false);
+                                    Manifest.permission.ACCESS_COARSE_LOCATION,false);
                             if (fineLocationGranted != null && fineLocationGranted) {
                                 setMyLocation();
                             } else if (coarseLocationGranted != null && coarseLocationGranted) {
@@ -77,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                             }
                         }
                 );
-        locationPermissionRequest.launch(new String[]{
+        locationPermissionRequest.launch(new String[] {
                 Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION
         });
@@ -101,12 +138,14 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     public void onSuccess(Location location) {
                         // Got last known location. In some rare situations this can be null.
                         if (location != null) {
-                            UserLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+                            UserLatLng = new LatLng(location.getLatitude(),location.getLongitude());
 
                             map.animateCamera(
-                                    CameraUpdateFactory.newLatLngZoom(UserLatLng, 15));
+                                    CameraUpdateFactory.newLatLngZoom(UserLatLng,15));
                             map.addMarker(new MarkerOptions().position(UserLatLng));
-                        } else {
+                        }
+                        else
+                        {
                             map.animateCamera(
                                     CameraUpdateFactory
                                             .newLatLngZoom(LocationUtils.LODZ_COOR, LODZ_ZOOM));
@@ -116,4 +155,31 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 });
 
     }
+
+    private Circle drawCircle(LatLng point, int radius){
+
+        // Instantiating CircleOptions to draw a circle around the marker
+        CircleOptions circleOptions = new CircleOptions();
+
+        // Specifying the center of the circle
+        circleOptions.center(point);
+
+        // Radius of the circle
+        circleOptions.radius(radius*1000);
+
+        // Border color of the circle
+        circleOptions.strokeColor(Color.BLACK);
+
+        // Fill color of the circle
+        circleOptions.fillColor(0x30ff0000);
+
+        // Border width of the circle
+        circleOptions.strokeWidth(2);
+
+        // Adding the circle to the GoogleMap
+        mapCircle = map.addCircle(circleOptions);
+        return mapCircle;
+
+    }
+
 }

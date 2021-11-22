@@ -7,30 +7,30 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class RegisterLoginActivity extends AppCompatActivity {
-    private Button register;
-    private Button login;
+public class ChooseRoleActivity extends AppCompatActivity {
 
+    private Button specialist;
+    private Button looking;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register_login);
+        setContentView(R.layout.activity_choose_role);
         getSupportActionBar().hide();
-        register = findViewById(R.id.button);
-        login = findViewById(R.id.button2);
-        register.setOnClickListener(new View.OnClickListener() {
+        looking = findViewById(R.id.button7);
+        specialist= findViewById(R.id.button6);
+        looking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                Intent i = new Intent(getApplicationContext(),ChooseRoleActivity.class);
+                Intent i = new Intent(getApplicationContext(),UserRegisterActivity1.class);
                 startActivity(i);
             }
         });
-        login.setOnClickListener(new View.OnClickListener() {
+        specialist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                Intent i = new Intent(getApplicationContext(),LoginActivity.class);
+                Intent i = new Intent(getApplicationContext(),RegisterActivity1.class);
                 startActivity(i);
             }
         });

@@ -3,6 +3,7 @@
     package="com.example.fixnow">
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -11,13 +12,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
-        <activity android:name=".RegisterLoginActivity"></activity>
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".RegisterActivity3" />
+        <activity android:name=".RegisterActivity2" />
+        <activity android:name=".RegisterActivity1" />
+        <activity android:name=".UserRegisterActivity2" />
+        <activity android:name=".UserRegisterActivity1" />
+        <activity android:name=".ChooseRoleActivity" />
+        <activity android:name=".MainActivity" />
 
+        <meta-data
+            android:name="com.google.android.wearable.standalone"
+            android:value="true" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAy54fh074Z_Jq4NDOkz5lerW2zfr5Uiic" />
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".RegisterLoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

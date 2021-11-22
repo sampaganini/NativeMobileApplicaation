@@ -4,22 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <include
-        android:id="@+id/bottomSheet"
-        layout="@layout/activity_top_searcher" />
-
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,11 +22,16 @@
         android:fitsSystemWindows="true"
         android:orientation="vertical">
 
+
     </LinearLayout>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/bottomSheet"
+            layout="@layout/activity_bottom_map_specialist" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
