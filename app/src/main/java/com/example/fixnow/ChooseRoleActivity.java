@@ -18,20 +18,19 @@ public class ChooseRoleActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         looking = findViewById(R.id.button7);
         specialist= findViewById(R.id.button6);
+        Intent intent = new Intent(getApplicationContext(),RegisterActivity1.class);
         looking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
-                Intent i = new Intent(getApplicationContext(),UserRegisterActivity1.class);
-                startActivity(i);
+                intent.putExtra("type", "USER");
+                startActivity(intent);
             }
         });
         specialist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
-                Intent i = new Intent(getApplicationContext(),RegisterActivity1.class);
-                startActivity(i);
+                intent.putExtra("type", "SPEC");
+                startActivity(intent);
             }
         });
     }

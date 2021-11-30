@@ -29,8 +29,20 @@ public class RegisterActivity1 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(CheckAllFields()) {
-                    Intent i = new Intent(getApplicationContext(), RegisterActivity2.class);
-                    startActivity(i);
+                    Bundle bundle = getIntent().getExtras();
+                    String type = bundle.getString("type");
+                    if(type.equals("SPEC")) {
+                        Intent i = new Intent(getApplicationContext(), RegisterActivity2.class);
+                        i.putExtra("type", type);
+                        startActivity(i);
+                    }
+                    if(type.equals("SPEC")) {
+                        Intent i = new Intent(getApplicationContext(), UserRegisterActivity2.class);
+                        i.putExtra("type", type);
+                        i.putExtra("login",login.getText().toString());
+                        i.putExtra("password",password.getText().toString());
+                        startActivity(i);
+                    }
                 }
 
             }

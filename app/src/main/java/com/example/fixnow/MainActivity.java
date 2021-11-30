@@ -5,14 +5,23 @@ import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.app.ActivityCompat;
 
 import com.example.fixnow.R;
+import com.example.fixnow.models.User;
 import com.example.fixnow.utils.LocationUtils;
 import com.example.fixnow.utils.PersmissionHelper;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -25,6 +34,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback {
 
@@ -50,12 +61,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         enableMyLocation();
     }
 
+
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         map = googleMap;
         // enableMyLocation();
     }
-
 
     private void enableMyLocation() {
         ActivityResultLauncher<String[]> locationPermissionRequest =

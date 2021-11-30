@@ -2,10 +2,14 @@ package com.example.fixnow;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
 
@@ -44,7 +48,7 @@ public class RegisterActivity3 extends AppCompatActivity implements OnMapReadyCa
     private EditText realRadius;
     private LatLng UserLatLng;
     private Circle mapCircle;
-
+    private Button register;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +63,7 @@ public class RegisterActivity3 extends AppCompatActivity implements OnMapReadyCa
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         enableMyLocation();
         radius = findViewById(R.id.seekBar);
+        register = findViewById(R.id.button5);
         realRadius = findViewById(R.id.editTextTextPersonName5);
         radius.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             int progressChangedValue = 0;
@@ -84,6 +89,31 @@ public class RegisterActivity3 extends AppCompatActivity implements OnMapReadyCa
                     mapCircle = drawCircle(UserLatLng, progressChangedValue);
                 }
 
+            }
+        });
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    Bundle bundle = getIntent().getExtras();
+                    String type = bundle.getString("type");
+                    String login = bundle.getString("login");
+                    String password = bundle.getString("password");
+                    String name = bundle.getString("name");
+                    String surname = bundle.getString("surname");
+                    String telephone = bundle.getString("telephone");
+                    String specialization = bundle.getString("specialization");
+                    Intent i = new Intent(getApplicationContext(), RegisterActivity4.class);
+                    i.putExtra("type", type);
+                    i.putExtra("login",login);
+                    i.putExtra("password",password);
+                    i.putExtra("name",name);
+                    i.putExtra("surname",surname);
+                    i.putExtra("telephone",telephone);
+                    i.putExtra("specialization",specialization);
+                    i.putExtra("longitude",UserLatLng.longitude);
+                    i.putExtra("latitude",UserLatLng.latitude);
+                    i.putExtra("radius", (Parcelable) realRadius);
+                    startActivity(i);
             }
         });
     }

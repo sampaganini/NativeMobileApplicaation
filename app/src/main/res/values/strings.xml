@@ -13,7 +13,9 @@
     <string name="surname">Nazwisko:</string>
     <string name="specialization">Specjalizacja:</string>
     <string name="save">Zapisz</string>
-    <string name="search">Wyszukaj Specjalistę</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="company">Nazwa firmy:</string>
+    <string name="description">Opis:</string>
+    <string name="search">Wyszukaj specjalistę</string>
+    <string name="search2">Szukaj</string>
+    <string name="category">Wybierz kategorię</string>
 </resources>
