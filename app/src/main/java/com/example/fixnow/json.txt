@@ -1,0 +1,117 @@
+places = {
+                'type': 'FeatureCollection',
+                'features': [
+                    {
+                        'type': 'Feature',
+                        'properties': {
+                            'icon': 'theatre',
+                            'cat': 'mechanik',
+                            'cat_color':'9C27B0',
+                            'desc':'Mechanik 1',
+                            'id':'expertMechanik1'
+                        },
+                        'geometry': {
+                            'type': 'Point',
+                            'coordinates': [51.77280945737389, 19.502178877476414 ].reverse()
+                        }
+                    },
+                    {
+                        'type': 'Feature',
+                        'properties': {
+                            'icon': 'theatre',
+                            'cat': 'hydraulik',
+                            'cat_color':'FFAA00',
+                            'desc':'Hydraulik 1',
+                            'id':'expertHydraulik1'
+                        },
+                        'geometry': {
+                            'type': 'Point',
+                            'coordinates': [51.7451835872455, 19.5509307085311].reverse()
+                        }
+                    },
+                    {
+                        'type': 'Feature',
+                        'properties': {
+                            'icon': 'theatre',
+                            'cat': 'mechanik',
+                            'cat_color':'9C27B0',
+                            'desc':'Mechanik 2',
+                            'id':'expertMechanik2'
+                        },
+                        'geometry': {
+                            'type': 'Point',
+                            'coordinates': [51.740081578290464, 19.513851851109226].reverse()
+                        }
+                    },
+                    {
+                        'type': 'Feature',
+                        'properties': {
+                            'icon': 'theatre',
+                            'cat': 'hydraulik',
+                            'cat_color':'FFAA00',
+                            'desc':'Hydraulik 2',
+                            'id':'expertHydraulik2'
+                        },
+                        'geometry': {
+                            'type': 'Point',
+                            'coordinates': [51.761761137546344, 19.45411369192954 ].reverse()
+                        }
+                    },
+                    {
+                        'type': 'Feature',
+                        'properties': {
+                            'icon': 'theatre',
+                            'cat': 'dekarz',
+                            'cat_color':'00796B',
+                            'desc':'dekarz 1',
+                            'id':'expertDekarz1'
+                        },
+                        'geometry': {
+                            'type': 'Point',
+                            'coordinates': [51.774258,19.464460 ].reverse()
+                        }
+                    },
+                    {
+                        'type': 'Feature',
+                        'properties': {
+                            'icon': 'theatre',
+                            'cat': 'ślusarz',
+                            'cat_color':'FF6358',
+                            'desc':'ślusarz 1',
+                            'id':'expertSlusarz1'
+                        },
+                        'geometry': {
+                            'type': 'Point',
+                            'coordinates': [51.722283,19.460532].reverse()
+                        }
+                    },
+                    {
+                        'type': 'Feature',
+                        'properties': {
+                            'icon': 'theatre',
+                            'cat': 'geodeta',
+                            'cat_color':'1F7BC4',
+                            'desc':'geodeta 1',
+                            'id':'expertGeodeta1'
+                        },
+                        'geometry': {
+                            'type': 'Point',
+                            'coordinates': [51.792569,19.452575].reverse()
+                        }
+                    },
+                    {
+                        'type': 'Feature',
+                        'properties': {
+                            'icon': 'theatre',
+                            'cat': 'układanie płytek',
+                            'cat_color':'FF0000',
+                            'desc':'układanie płytek 1',
+                            'id':'expertUkladaniePlytek1'
+                        },
+                        'geometry': {
+                            'type': 'Point',
+                            'coordinates': [51.789596,19.480059].reverse()
+                        }
+                    }
+                ]
+            };
