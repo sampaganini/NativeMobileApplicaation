@@ -3,12 +3,12 @@ package com.example.fixnow.utils;
 import com.google.android.gms.maps.model.LatLng;
 
 public class LocationUtils {
-    private static final int LODZ_AREA_RADIUS = 40;
-    public static final LatLng LODZ_COOR = new LatLng(51.7833,19.4667);
+    private static final int LODZ_RADIUS = 40;
+    public static final LatLng LODZ_COORDINATES = new LatLng(51.7833,19.4667);
 
     public static boolean isLodz(LatLng latitudeLongitude)
     {
-        return calculateDistance(latitudeLongitude,LODZ_COOR) < LODZ_AREA_RADIUS;
+        return calculateDistance(latitudeLongitude,LODZ_COORDINATES) < LODZ_RADIUS;
     }
     public static double calculateDistance(LatLng latLng1, LatLng latLng2)
     {

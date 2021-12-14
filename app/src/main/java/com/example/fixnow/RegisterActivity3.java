@@ -49,6 +49,7 @@ public class RegisterActivity3 extends AppCompatActivity implements OnMapReadyCa
     private LatLng UserLatLng;
     private Circle mapCircle;
     private Button register;
+    private Float  radiuss;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +82,7 @@ public class RegisterActivity3 extends AppCompatActivity implements OnMapReadyCa
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 realRadius.setText(""+progressChangedValue);
+                radiuss = new Float(progressChangedValue);
                 if(UserLatLng != null) {
                     if(mapCircle != null)
                     {
@@ -110,9 +112,9 @@ public class RegisterActivity3 extends AppCompatActivity implements OnMapReadyCa
                     i.putExtra("surname",surname);
                     i.putExtra("telephone",telephone);
                     i.putExtra("specialization",specialization);
-                    i.putExtra("longitude",UserLatLng.longitude);
-                    i.putExtra("latitude",UserLatLng.latitude);
-                    i.putExtra("radius", (Parcelable) realRadius);
+                    i.putExtra("longitude",new Float(UserLatLng.longitude));
+                    i.putExtra("latitude",new Float(UserLatLng.latitude));
+                    i.putExtra("radius",radiuss);
                     startActivity(i);
             }
         });
@@ -139,8 +141,8 @@ public class RegisterActivity3 extends AppCompatActivity implements OnMapReadyCa
                             } else {
                                 map.animateCamera(
                                         CameraUpdateFactory
-                                                .newLatLngZoom(LocationUtils.LODZ_COOR, LODZ_ZOOM));
-                                map.addMarker(new MarkerOptions().position(LocationUtils.LODZ_COOR));
+                                                .newLatLngZoom(LocationUtils.LODZ_COORDINATES, LODZ_ZOOM));
+                                map.addMarker(new MarkerOptions().position(LocationUtils.LODZ_COORDINATES));
                             }
                         }
                 );
@@ -166,20 +168,27 @@ public class RegisterActivity3 extends AppCompatActivity implements OnMapReadyCa
                 .addOnSuccessListener(this, new OnSuccessListener<Location>() {
                     @Override
                     public void onSuccess(Location location) {
-                        // Got last known location. In some rare situations this can be null.
                         if (location != null) {
-                            UserLatLng = new LatLng(location.getLatitude(),location.getLongitude());
-
-                            map.animateCamera(
-                                    CameraUpdateFactory.newLatLngZoom(UserLatLng,15));
-                            map.addMarker(new MarkerOptions().position(UserLatLng));
-                        }
-                        else
-                        {
+                            UserLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+                            if(LocationUtils.isLodz(UserLatLng)) {
+                                map.animateCamera(
+                                        CameraUpdateFactory.newLatLngZoom(UserLatLng, 15));
+                                map.addMarker(new MarkerOptions().position(UserLatLng));
+                            }
+                            else
+                            {
+                                UserLatLng = LocationUtils.LODZ_COORDINATES;
+                                map.animateCamera(
+                                        CameraUpdateFactory
+                                                .newLatLngZoom(LocationUtils.LODZ_COORDINATES, LODZ_ZOOM));
+                                map.addMarker(new MarkerOptions().position(LocationUtils.LODZ_COORDINATES));
+                            }
+                        } else {
+                            UserLatLng = LocationUtils.LODZ_COORDINATES;
                             map.animateCamera(
                                     CameraUpdateFactory
-                                            .newLatLngZoom(LocationUtils.LODZ_COOR, LODZ_ZOOM));
-                            map.addMarker(new MarkerOptions().position(LocationUtils.LODZ_COOR));
+                                            .newLatLngZoom(LocationUtils.LODZ_COORDINATES, LODZ_ZOOM));
+                            map.addMarker(new MarkerOptions().position(LocationUtils.LODZ_COORDINATES));
                         }
                     }
                 });

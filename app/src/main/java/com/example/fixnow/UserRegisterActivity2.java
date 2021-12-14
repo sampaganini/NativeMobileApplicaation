@@ -1,7 +1,6 @@
 package com.example.fixnow;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LiveData;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,13 +9,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.fixnow.api.ApiProvider;
 import com.example.fixnow.api.ApiService;
 import com.example.fixnow.api.RetrofitClient;
+import com.example.fixnow.models.Login;
 import com.example.fixnow.models.User;
-import com.google.android.gms.common.api.BooleanResult;
 
-import java.io.IOException;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class UserRegisterActivity2 extends AppCompatActivity {
     private Button register;
@@ -37,28 +38,31 @@ public class UserRegisterActivity2 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(CheckAllFields()) {
-                    Intent i = new Intent(getApplicationContext(), LoginActivity.class);
                     Bundle bundle = getIntent().getExtras();
                     String type = bundle.getString("type");
                     String login = bundle.getString("login");
                     String password = bundle.getString("password");
-                    String name = bundle.getString("name");
-                    String surname = bundle.getString("surname");
-                    String telephone = bundle.getString("telephone");
-                    ApiProvider apiProvider = new ApiProvider();
-                    //try {
-                      //LiveData<Boolean> success = apiProvider.addUser(new User(login,password,type,name,surname,0,null,null,null,null,null,telephone));
-                      //Boolean result = success.getValue();
-                      //if(result == false) {
-                          //Toast.makeText()
-                     // }
-                     // else {
-                          startActivity(i);
-                    //  }
-                  //  } catch (IOException e) {
-                      //  e.printStackTrace();
-                  //  }
-
+                        Retrofit retrofit = RetrofitClient.getRetrofitClient("http://192.168.100.155:2222");
+                        ApiService service = retrofit.create(ApiService.class);
+                        Call<Void> call = service.addUser(new User(login,password,type,name.getText().toString(),surname.getText().toString(),null,null,null,null,null,telephone.getText().toString()));
+                        call.enqueue(new Callback<Void>() {
+                            @Override
+                            public void onResponse(Call<Void> call, Response<Void> response) {
+                                int code = response.code();
+                                if (response.code() == 200) {
+                                    Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+                                    startActivity(i);
+                                } else {
+                                    Toast.makeText(getApplicationContext(),"Problem w rejestracji",Toast.LENGTH_LONG);
+                                    System.out.println("!!!!!!!! Request Error code :: " + response.code());
+                                }
+                            }
+                            @Override
+                            public void onFailure(Call<Void> call, Throwable t) {
+                                System.out.println("Błąd łączenia");
+                                Toast.makeText(getApplicationContext(),"Problem w rejestracji",Toast.LENGTH_LONG);
+                            }
+                        });
                 }
             }
         });

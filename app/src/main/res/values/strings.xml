@@ -18,4 +18,22 @@
     <string name="search">Wyszukaj specjalistę</string>
     <string name="search2">Szukaj</string>
     <string name="category">Wybierz kategorię</string>
+    <string name="logout">Wyloguj się</string>
+    <string name="user_services">Twoje usługi</string>
+    <string name="maxprice">Maksymalny budżet</string>
+    <string name="change_radius">Zmień promień usług</string>
+    <string name="Request">Zamów usługę u</string>
+    <string name="rate">Oceń usługę u</string>
+    <string name="Send">Wyślij</string>
+    <string name="activity_desc">Szczegóły usługi</string>
+    <string name="opinions">Opinie</string>
+    <string name="activities">Twoje usługi</string>
+    <string name="rate2">Komentarz do opinii</string>
+    <string name="cancel">Anuluj</string>
+    <string name="accept">Akceptuj</string>
+    <string name="dismiss">Odrzuć</string>
+    <string name="req">Wyślij zgłoszenie</string>
+    <string name="rating">Pokaż opinie</string>
+    <string name="end">Zakończ</string>
+
 </resources>

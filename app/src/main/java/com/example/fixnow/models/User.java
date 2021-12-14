@@ -6,27 +6,25 @@ public class User {
     private String type;
     private String name;
     private String last_name;
-    private int radius;
-    private Double longitude;
-    private Double latitude;
-    private String telephone;
-    private String Specialization;
+    private Float radius;
+    private Float location_lon;
+    private Float location_lat;
+    private String phone;
+    private Long service_id;
     private String description;
-    private String company;
 
-    public User(String login, String password, String type, String name, String last_name, int radius, Double longitude, Double latitude, String specialization, String description, String company,String tel) {
+    public User(String login, String password, String type, String name, String last_name, Float radius, Float locationLon, Float latitude, Long serviceId, String description, String tel) {
         this.login = login;
         this.password = password;
         this.type = type;
         this.name = name;
         this.last_name = last_name;
         this.radius = radius;
-        this.longitude = longitude;
-        this.latitude = latitude;
-        Specialization = specialization;
+        this.location_lon = locationLon;
+        this.location_lat = latitude;
+        this.service_id = serviceId;
         this.description = description;
-        this.company = company;
-        this.telephone = tel;
+        this.phone = tel;
     }
 
     public String getLogin() {
@@ -69,36 +67,12 @@ public class User {
         this.last_name = last_name;
     }
 
-    public int getRadius() {
+    public Float getRadius() {
         return radius;
     }
 
-    public void setRadius(int radius) {
+    public void setRadius(Float radius) {
         this.radius = radius;
-    }
-
-    public Double getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(Double longitude) {
-        this.longitude = longitude;
-    }
-
-    public Double getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(Double latitude) {
-        this.latitude = latitude;
-    }
-
-    public String getSpecialization() {
-        return Specialization;
-    }
-
-    public void setSpecialization(String specialization) {
-        Specialization = specialization;
     }
 
     public String getDescription() {
@@ -109,11 +83,44 @@ public class User {
         this.description = description;
     }
 
-    public String getCompany() {
-        return company;
+
+    public String getTelephone() {
+        return phone;
     }
 
-    public void setCompany(String company) {
-        this.company = company;
+    public void setTelephone(String telephone) {
+        this.phone = telephone;
+    }
+
+    public Float getLocationLon() {
+        return location_lon;
+    }
+
+    public void setLocationLon(Float locationLon) {
+        this.location_lon = locationLon;
+    }
+
+    public Float getLocationLat() {
+        return location_lat;
+    }
+
+    public void setLocationLat(Float locationLat) {
+        this.location_lat = locationLat;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public Long getServiceId() {
+        return service_id;
+    }
+
+    public void setServiceId(Long serviceId) {
+        this.service_id = serviceId;
     }
 }

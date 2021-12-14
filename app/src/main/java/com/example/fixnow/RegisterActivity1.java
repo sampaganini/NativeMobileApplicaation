@@ -9,6 +9,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.fixnow.api.ApiService;
+import com.example.fixnow.api.RetrofitClient;
+import com.example.fixnow.models.LoginResponse;
+import com.example.fixnow.models.loginCheck;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+
 public class RegisterActivity1 extends AppCompatActivity {
 
     private Button next;
@@ -28,26 +38,45 @@ public class RegisterActivity1 extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(CheckAllFields()) {
-                    Bundle bundle = getIntent().getExtras();
-                    String type = bundle.getString("type");
-                    if(type.equals("SPEC")) {
-                        Intent i = new Intent(getApplicationContext(), RegisterActivity2.class);
-                        i.putExtra("type", type);
-                        startActivity(i);
-                    }
-                    if(type.equals("SPEC")) {
-                        Intent i = new Intent(getApplicationContext(), UserRegisterActivity2.class);
-                        i.putExtra("type", type);
-                        i.putExtra("login",login.getText().toString());
-                        i.putExtra("password",password.getText().toString());
-                        startActivity(i);
-                    }
-                }
+                if (CheckAllFields()) {
+                    Retrofit retrofit = RetrofitClient.getRetrofitClient("http://192.168.100.155:2222");
+                    ApiService service = retrofit.create(ApiService.class);
+                    Call<Void> callAsync2 = service.checkLogin(new loginCheck(login.getText().toString()));
+                    callAsync2.enqueue(new Callback<Void>() {
+                        @Override
+                        public void onResponse(Call<Void> call, Response<Void> response) {
+                                if (response.code() == 200) {
+                                    Bundle bundle = getIntent().getExtras();
+                                    String type = bundle.getString("type");
+                                    if (type.equals("TECH")) {
+                                        Intent i = new Intent(getApplicationContext(), RegisterActivity2.class);
+                                        i.putExtra("type", type);
+                                        i.putExtra("login", login.getText().toString());
+                                        i.putExtra("password", password.getText().toString());
+                                        startActivity(i);
+                                    }
+                                    if (type.equals("USER")) {
+                                        Intent i = new Intent(getApplicationContext(), UserRegisterActivity2.class);
+                                        i.putExtra("type", type);
+                                        i.putExtra("login", login.getText().toString());
+                                        i.putExtra("password", password.getText().toString());
+                                        startActivity(i);
+                                    }
+                                }
+                            else {
+                                Toast.makeText(getApplicationContext(), "Login exists", Toast.LENGTH_LONG).show();
+                                System.out.println("Request Error :: " + response.code());
+                            }
+                        }
 
+                        @Override
+                        public void onFailure(Call<Void> call, Throwable t) {
+                            System.out.println("!!!!!!" + t.getMessage() + "\n");
+                        }
+                    });
+                }
             }
         });
-
     }
 
     private boolean CheckAllFields() {

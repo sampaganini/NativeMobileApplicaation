@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UserRegisterActivity1">
+    tools:context=".RegisterActivity1">
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button3"
@@ -189,6 +189,7 @@
         android:backgroundTint="#8DDAD8D8"
         android:ems="10"
         android:inputType="textPersonName"
+        android:password="true"
         android:textColor="#3F7100"
         android:textSize="27sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline11"
@@ -206,6 +207,7 @@
         android:inputType="textPersonName"
         android:textColor="#3F7100"
         android:textSize="27sp"
+        android:password="true"
         app:layout_constraintBottom_toTopOf="@+id/guideline18"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintStart_toStartOf="@+id/guideline3"

@@ -29,7 +29,7 @@ public class ChooseRoleActivity extends AppCompatActivity {
         specialist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent.putExtra("type", "SPEC");
+                intent.putExtra("type", "TECH");
                 startActivity(intent);
             }
         });

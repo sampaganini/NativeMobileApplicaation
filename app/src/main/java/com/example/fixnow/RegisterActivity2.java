@@ -28,7 +28,7 @@ public class RegisterActivity2 extends AppCompatActivity {
         surname = (EditText)findViewById(R.id.editTextTextPersonName3);
         telephone = (EditText)findViewById(R.id.editTextTextPersonName);
         Spinner specialization = findViewById(R.id.spinner);
-        String[] items = new String[]{"Mechanik", "Hydraulik", "Ślusarz"};
+        String[] items = new String[]{"Mechanik", "Hydraulik", "Elektryk","Stolarz"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
         specialization.setAdapter(adapter);
         register.setOnClickListener(new View.OnClickListener() {
