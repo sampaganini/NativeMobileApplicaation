@@ -120,7 +120,7 @@ public class SpecialistProfileActivity extends AppCompatActivity {
                     Intent i = null;
                     switch (item.getItemId()) {
                         case R.id.item1:
-                            i = new Intent(getApplicationContext(), Login.class);
+                            i = new Intent(getApplicationContext(), LoginActivity.class);
                             startActivity(i);
                             return true;
 

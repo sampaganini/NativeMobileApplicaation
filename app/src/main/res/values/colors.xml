@@ -10,4 +10,8 @@
     <color name="main">#8FCF3E</color>
     <color name="main_dark">#355A05</color>
     <color name="main_accent">#8EFF00</color>
+    <color name="star">#DFCA04</color>
+    <color name="gps_icon_color">#ABD54A</color>
+    <color name="graphite">#5C5C5B</color>
+
 </resources>

@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -44,6 +45,7 @@ public class OpinionsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_opinions);
+        getSupportActionBar().hide();
         BottomNavigationView bottomNav = findViewById(R.id.user_menu);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
         table = findViewById(R.id.table);
@@ -86,8 +88,10 @@ public class OpinionsActivity extends AppCompatActivity {
                 View separate = LayoutInflater.from(this)
                         .inflate(R.layout.separator, table, false);
                 TextView name = tableRow.findViewById(R.id.textView20);
-                RatingBar rate = tableRow.findViewById(R.id.ratingBar2);
+                RatingBar rate = tableRow.findViewById(R.id.ratingBar);
                 TextView desc = tableRow.findViewById(R.id.textView24);
+                TextView rating = tableRow.findViewById(R.id.textView10);
+                rating.setText(info.getStarRating().toString());
                 setName(name,info.getLeftBy());
                 rate.setRating(info.getStarRating());
                 desc.setText(info.getContent());
@@ -129,7 +133,7 @@ public class OpinionsActivity extends AppCompatActivity {
                     Intent i = null;
                     switch (item.getItemId()) {
                         case R.id.item1:
-                            i = new Intent(getApplicationContext(), Login.class);
+                            i = new Intent(getApplicationContext(), LoginActivity.class);
                             startActivity(i);
                             return true;
 

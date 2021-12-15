@@ -28,10 +28,12 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -146,9 +148,11 @@ public class UserActivity extends AppCompatActivity {
                 View separate = LayoutInflater.from(this)
                         .inflate(R.layout.separator, table, false);
                 TextView date = tableRow.findViewById(R.id.textView20);
-                SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                Locale loc = new Locale("pl", "PL");
+                DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM, new Locale("pl"));
+                SimpleDateFormat sdfForParsing = new SimpleDateFormat("d MMMM yyyy", Locale.ENGLISH);
                 Date date2 = new Date(info.getCreated());
-                date.setText(date2.toString());
+                date.setText(df.format(date2));
                 TextView type = tableRow.findViewById(R.id.textView22);
                 Button end = tableRow.findViewById(R.id.button13);
                 if (is_accepted == true) {

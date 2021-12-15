@@ -40,7 +40,8 @@ public class SendRequestActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         techName = findViewById(R.id.textView15);
         desc = findViewById(R.id.editTextTextPersonName8);
-        budget = findViewById(R.id.editTextTextPersonName7);
+        BottomNavigationView bottomNav = findViewById(R.id.user_menu);
+        bottomNav.setOnNavigationItemSelectedListener(navListener);
         send = findViewById(R.id.button15);
         Bundle bundle = getIntent().getExtras();
         Long id = bundle.getLong("id");
@@ -95,7 +96,7 @@ public class SendRequestActivity extends AppCompatActivity {
                     Intent i = null;
                     switch (item.getItemId()) {
                         case R.id.item1:
-                            i = new Intent(getApplicationContext(), Login.class);
+                            i = new Intent(getApplicationContext(), LoginActivity.class);
                             startActivity(i);
                             return true;
 

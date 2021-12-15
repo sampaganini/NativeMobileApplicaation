@@ -23,9 +23,11 @@ import com.example.fixnow.models.serviceRequest;
 import com.example.fixnow.models.serviceResponse;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -112,7 +114,8 @@ public class SpecialistActivity extends AppCompatActivity {
                 TextView date = tableRow.findViewById(R.id.textView20);
                 SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
                 Date date2 = new Date(info.getCreated());
-                date.setText(date2.toString());
+                DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM, new Locale("pl"));
+                date.setText(df.format(date2));
                 TextView type = tableRow.findViewById(R.id.textView22);
                 Button cancel = tableRow.findViewById(R.id.button16);
                 Button end = tableRow.findViewById(R.id.button13);
@@ -121,16 +124,19 @@ public class SpecialistActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Long id = info.getId();
-                        acceptService(id,accept,type);
+                        acceptService(id,cancel,accept,type,end);
                     }
                 });
 
                 if (is_accepted == true) {
-                    end.setVisibility(View.VISIBLE);
+                    end.setVisibility(View.INVISIBLE);
+                    cancel.setVisibility(View.VISIBLE);
+                    accept.setVisibility(View.INVISIBLE);
                     type.setTextColor(Color.GREEN);
                     type.setText("Zaakceptowane");
 
                 } else {
+                    cancel.setVisibility(View.INVISIBLE);
                     type.setTextColor(Color.GRAY);
                     type.setText("Oczekujące");
                 }
@@ -184,14 +190,16 @@ public class SpecialistActivity extends AppCompatActivity {
         });
     }
 
-    private void acceptService(Long idService, Button cancel, TextView type) {
+    private void acceptService(Long idService, Button cancel,Button accept, TextView type,Button end) {
         ApiService service = retrofit.create(ApiService.class);
         Call<Void> call = service.acceptService(idService);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.code() == 200) {
-                    cancel.setVisibility(View.INVISIBLE);
+                    cancel.setVisibility(View.VISIBLE);
+                    accept.setVisibility(View.INVISIBLE);
+                    end.setVisibility(View.INVISIBLE);
                     type.setTextColor(Color.GREEN);
                     type.setText("Zaakceptowano");
                     Toast.makeText(getApplicationContext(), "Zaakceptowano" + response.code(), Toast.LENGTH_LONG).show();
@@ -245,7 +253,7 @@ public class SpecialistActivity extends AppCompatActivity {
                             return true;
 
                         case R.id.item2:
-                            i = new Intent(getApplicationContext(), MenuActivity.class);
+                            i = new Intent(getApplicationContext(), MenuSpecialistActivity.class);
                             startActivity(i);
                             return true;
 

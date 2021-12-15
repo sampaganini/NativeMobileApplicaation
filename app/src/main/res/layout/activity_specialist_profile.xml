@@ -133,15 +133,14 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline53"
         app:layout_constraintStart_toStartOf="@+id/guideline49"
         app:layout_constraintTop_toTopOf="@+id/guideline54"
-        android:src="@drawable/user"
-        app:srcCompat="@drawable/user" />
+        android:src="@drawable/_80px_user_avatar_svg" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button11"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:backgroundTint="#8FCF3E"
-        android:fontFamily="@font/montserrat_bold"
+        app:fontFamily="@font/montserrat_bold"
         android:text="@string/req"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
@@ -167,6 +166,7 @@
     <RatingBar
         android:id="@+id/rating"
         style="?android:attr/ratingBarStyleSmall"
+        android:theme="@style/RatingBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -201,7 +201,6 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:fontFamily="@font/montserrat_bold"
-        android:text="TextView"
         android:textAlignment="center"
         android:textSize="25sp"
         android:textColor="@color/white"
@@ -214,28 +213,13 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:fontFamily="@font/montserrat_bold"
-        android:text="TextView"
         android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textColor="#424040"
+        android:textSize="25sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline56"
         app:layout_constraintEnd_toStartOf="@+id/guideline53"
         app:layout_constraintStart_toStartOf="@+id/guideline49"
         app:layout_constraintTop_toBottomOf="@+id/imageView5" />
-
-    <TextView
-        android:id="@+id/textView13"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="#D8D7D7"
-        android:fontFamily="@font/montserrat"
-        android:text="TextView"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline59"
-        app:layout_constraintEnd_toStartOf="@+id/guideline53"
-        app:layout_constraintStart_toStartOf="@+id/guideline49"
-        app:layout_constraintTop_toBottomOf="@+id/button12" />
 
     <TextView
         android:id="@+id/textView"
@@ -273,5 +257,29 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/user_menu" />
+
+    <TextView
+        android:id="@+id/textView26"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#D8D7D7"
+        app:layout_constraintBottom_toBottomOf="@+id/textView13"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button12" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#D8D7D7"
+        android:fontFamily="@font/montserrat"
+        android:text="TextView"
+        android:textColor="#323232"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline59"
+        app:layout_constraintEnd_toStartOf="@+id/guideline53"
+        app:layout_constraintStart_toStartOf="@+id/guideline49"
+        app:layout_constraintTop_toBottomOf="@+id/button12" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -164,8 +164,7 @@
             android:ems="10"
             android:fontFamily="@font/montserrat"
             android:gravity="top"
-            android:inputType="text|textMultiLine"
-            android:text="Twoja opinia..." />
+            android:inputType="text|textMultiLine" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <RatingBar
@@ -180,6 +179,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline75"
         android:isIndicator="false"
+        android:theme="@style/RatingBar"
         android:scaleX="3.5"
         android:scaleY="3.5"/>
 

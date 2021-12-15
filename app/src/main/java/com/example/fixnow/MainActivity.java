@@ -7,9 +7,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -17,6 +23,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.example.fixnow.api.ApiService;
 import com.example.fixnow.api.RetrofitClient;
@@ -32,12 +39,14 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,12 +66,14 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private FusedLocationProviderClient fusedLocationClient;
     private PersmissionHelper appCompatPermissionHelper = new PersmissionHelper();
     private LatLng UserLatLng;
-
+    private FloatingActionButton myLocationButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
+        BottomNavigationView bottomNav = findViewById(R.id.user_menu);
+        bottomNav.setOnNavigationItemSelectedListener(navListener);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         if (mapFragment != null) {
@@ -70,6 +81,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         enableMyLocation();
+        initMyLocationButton();
     }
 
 
@@ -96,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                                 map.animateCamera(
                                         CameraUpdateFactory
                                                 .newLatLngZoom(LocationUtils.LODZ_COORDINATES, LODZ_ZOOM));
-                                map.addMarker(new MarkerOptions().position(LocationUtils.LODZ_COORDINATES).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+                                map.addMarker(new MarkerOptions().position(LocationUtils.LODZ_COORDINATES).icon(BitmapFromVector(getApplicationContext(), R.drawable.ic_baseline_location_on_24)));
                                 displaySpecialists(UserLatLng);
                             }
                         }
@@ -107,29 +119,46 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         });
     }
 
+    private BitmapDescriptor BitmapFromVector(Context context, int vectorResId) {
+        // below line is use to generate a drawable.
+        Drawable vectorDrawable = ContextCompat.getDrawable(context, vectorResId);
+
+        // below line is use to set bounds to our vector drawable.
+        vectorDrawable.setBounds(0, 0, vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight());
+
+        // below line is use to create a bitmap for our
+        // drawable which we have added.
+        Bitmap bitmap = Bitmap.createBitmap(vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+
+        // below line is use to add bitmap in our canvas.
+        Canvas canvas = new Canvas(bitmap);
+
+        // below line is use to draw our
+        // vector drawable in canvas.
+        vectorDrawable.draw(canvas);
+
+        // after generating our bitmap we are returning our bitmap.
+        return BitmapDescriptorFactory.fromBitmap(bitmap);
+    }
+
     @SuppressLint("NoPermission")
     private void setMyLocation() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
             return;
         }
         fusedLocationClient.getLastLocation()
                 .addOnSuccessListener(this, new OnSuccessListener<Location>() {
                     @Override
                     public void onSuccess(Location location) {
+                        int iconId = (R.drawable.ic_baseline_location_on_24);
+                        Bitmap bitmapIcon = BitmapFactory.decodeResource(getResources(),iconId);
                         // Got last known location. In some rare situations this can be null.
                         if (location != null) {
                             UserLatLng = new LatLng(location.getLatitude(), location.getLongitude());
                             if(LocationUtils.isLodz(UserLatLng)) {
                                 map.animateCamera(
                                         CameraUpdateFactory.newLatLngZoom(UserLatLng, 15));
-                                map.addMarker(new MarkerOptions().position(UserLatLng).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+                                map.addMarker(new MarkerOptions().position(UserLatLng).icon(BitmapFromVector(getApplicationContext(), R.drawable.ic_baseline_location_on_24)));
                                 displaySpecialists(UserLatLng);
                             }
                             else
@@ -138,7 +167,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                                 map.animateCamera(
                                         CameraUpdateFactory
                                                 .newLatLngZoom(LocationUtils.LODZ_COORDINATES, LODZ_ZOOM));
-                                map.addMarker(new MarkerOptions().position(LocationUtils.LODZ_COORDINATES).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+                                BitmapDescriptor bitmapDescriptor
+                                        = BitmapDescriptorFactory.fromResource(
+                                        (int) BitmapDescriptorFactory.HUE_AZURE);
+                                map.addMarker(new MarkerOptions().position(UserLatLng).icon(BitmapFromVector(getApplicationContext(), R.drawable.ic_baseline_location_on_24)));
+
                                 displaySpecialists(UserLatLng);
 
                             }
@@ -147,13 +180,18 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                             map.animateCamera(
                                     CameraUpdateFactory
                                             .newLatLngZoom(LocationUtils.LODZ_COORDINATES, LODZ_ZOOM));
-                            map.addMarker(new MarkerOptions().position(LocationUtils.LODZ_COORDINATES).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+                            map.addMarker(new MarkerOptions().icon(BitmapFromVector(getApplicationContext(), R.drawable.ic_baseline_location_on_24)).position(UserLatLng).snippet("To Ty"));
                             displaySpecialists(UserLatLng);
                         }
                     }
                 });
     }
 
+
+    private void initMyLocationButton() {
+        myLocationButton = findViewById(R.id.my_location_button);
+        myLocationButton.setOnClickListener((View v) -> setMyLocation());
+    }
     public void displaySpecialists(LatLng userLatLng) {
         SharedPreferences sharedPref = getSharedPreferences("user_credentials", Context.MODE_PRIVATE);
         String token = sharedPref.getString("token", null);
@@ -253,7 +291,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     Intent i = null;
                     switch (item.getItemId()) {
                         case R.id.item1:
-                            i = new Intent(getApplicationContext(), Login.class);
+                            i = new Intent(getApplicationContext(), LoginActivity.class);
                             startActivity(i);
                             return true;
 

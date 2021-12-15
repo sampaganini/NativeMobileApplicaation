@@ -98,7 +98,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.68" />
+            app:layout_constraintGuide_percent="0.76" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline75"
@@ -169,42 +169,8 @@
                 android:ems="10"
                 android:fontFamily="@font/montserrat"
                 android:gravity="top"
-                android:inputType="text|textMultiLine"
-                android:text="Opisz swoją usterkę..."
-                 />
+                android:inputType="text|textMultiLine" />
         </com.google.android.material.textfield.TextInputLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@+id/guideline76"
-            app:layout_constraintEnd_toStartOf="@+id/guideline68"
-            app:layout_constraintStart_toStartOf="@+id/guideline66"
-            app:layout_constraintTop_toTopOf="@+id/guideline75">
-
-            <TextView
-                android:id="@+id/textView17"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:fontFamily="@font/montserrat"
-                android:paddingTop="12sp"
-                android:text="@string/maxprice"
-                android:textAlignment="center"
-                android:textSize="20sp" />
-
-            <EditText
-                android:id="@+id/editTextTextPersonName7"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:ems="10"
-                android:fontFamily="@font/montserrat"
-                android:inputType="textPersonName"
-                android:text="W zł"
-                android:textAlignment="center" />
-        </LinearLayout>
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/user_menu"

@@ -150,7 +150,7 @@
         app:srcCompat="@drawable/fixnow__2_" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/spec_menu"
+        android:id="@+id/user_menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -159,6 +159,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline88"
-        app:menu="@menu/specialist_menu"
+        app:menu="@menu/user_menu"
         tools:ignore="MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>

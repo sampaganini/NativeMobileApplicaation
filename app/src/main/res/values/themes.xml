@@ -14,4 +14,9 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlActivated">@color/star</item>
+        <item name="colorControlNormal">#5A5A5A</item>
+    </style>
+
 </resources>

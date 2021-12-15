@@ -59,6 +59,8 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search2);
         getSupportActionBar().hide();
         search = findViewById(R.id.button8);
+        BottomNavigationView bottomNav = findViewById(R.id.user_menu);
+        bottomNav.setOnNavigationItemSelectedListener(navListener);
         String[] specialists = new String[]{"Mechanik", "Hydraulik", "Stolarz","Elektryk"};
         chooseSpecialist = findViewById(R.id.listview);
         adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,specialists){
@@ -111,7 +113,7 @@ public class SearchActivity extends AppCompatActivity {
                     Intent i = null;
                     switch (item.getItemId()) {
                         case R.id.item1:
-                            i = new Intent(getApplicationContext(), Login.class);
+                            i = new Intent(getApplicationContext(), LoginActivity.class);
                             startActivity(i);
                             return true;
 

@@ -14,23 +14,40 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
-        <activity android:name=".RateActivity"></activity>
-        <activity android:name=".SpecialistActivity" />
-        <activity android:name=".UserActivity" />
-        <activity android:name=".OpinionsActivity" />
-        <activity android:name=".SendRequestActivity" />
-        <activity android:name=".MenuSpecialistActivity" />
-        <activity android:name=".SpecialistProfileActivity" />
-        <activity android:name=".SearchActivity" />
-        <activity android:name=".MenuActivity" />
-        <activity android:name=".RegisterActivity4" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".RegisterActivity3" />
-        <activity android:name=".RegisterActivity2" />
-        <activity android:name=".RegisterActivity1" />
-        <activity android:name=".UserRegisterActivity2" />
-        <activity android:name=".ChooseRoleActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".RateActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".SpecialistActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".UserActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".OpinionsActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".SendRequestActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".MenuSpecialistActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".SpecialistProfileActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".SearchActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".MenuActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".RegisterActivity4"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".LoginActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".RegisterActivity3"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".RegisterActivity2"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".RegisterActivity1"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".UserRegisterActivity2"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ChooseRoleActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait"/>
 
         <meta-data
             android:name="com.google.android.wearable.standalone"
@@ -42,10 +59,10 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".RegisterLoginActivity">
+        <activity android:name=".RegisterLoginActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
